@@ -1,7 +1,6 @@
-// Lista de categorias disponíveis
 const BuscarPorCategoria = document.getElementById('BuscarPorCategoria')
 const categoriasDisponiveis = ['Alimentação', 'Transporte', 'Lazer', 'Saúde', 'Educação', 'Esporte', 'Outros'];
-// Função para preencher o <select> de categorias
+
 function preencherCategorias() {
     const select = document.getElementById('categoria');
     categoriasDisponiveis.forEach(categoria => {
@@ -11,9 +10,9 @@ function preencherCategorias() {
         select.appendChild(opcao);
     });
 }
-// Evento para preencher as categorias quando a página carregar
+
 document.addEventListener('DOMContentLoaded', preencherCategorias);
-//Adicionar gastos
+
 class AddGasto {
     constructor(categoria, item, descricao, valor) {
         this.categoria = categoria;
@@ -23,15 +22,13 @@ class AddGasto {
     }
 }
 
-// Lista de gastos simulada : Mutu
 let listaDeGastos = [];
-// Função para adicionar um novo gasto à lista
+
 function adicionarGasto(categoria, item, descricao, valor) {
     const novoGasto = new AddGasto(categoria, item, descricao, valor);
     listaDeGastos.push(novoGasto);
 }
 
-// Função para pesquisar gastos por item
 function pesquisarItem(item) {
     return listaDeGastos.filter(gasto => gasto.item.toLowerCase().includes(item.toLowerCase()));
 }
@@ -40,14 +37,14 @@ function pesquisarEGerarLista() {
     const resultados = pesquisarItem(itemBuscado);
     mostrarListGastos({ [itemBuscado]: resultados });
 }
-// Função para remover um gasto da lista
+
 function removerGasto(index) {
     if (confirm('Deseja excluir esse Item?')) {
         listaDeGastos.splice(index, 1);
         exibirGastos();
     }
 }
-// Função para editar um gasto da lista
+
 function editarGasto(index) {
     const novoItem = prompt("Digite o novo item:");
     const novaDescricao = prompt("Digite a nova descrição:");
@@ -62,12 +59,11 @@ function editarGasto(index) {
         alert('Edição Inválida! Preencha os valores corretamente');
     }
 }
-// Função para mostrar os gastos na lista
+
 function mostrarListGastos(gastosPorItem) {
-    // Captura o elemento onde os gastos serão listados
+
     const listaDiv = document.getElementById('listGastos');
     listaDiv.innerHTML = '';
-    // Itera sobre os itens e gastos para criar a exibição na página
     for (const item in gastosPorItem) {
         const itemDiv = document.createElement('div');
         itemDiv.innerHTML = `<h2>${item}</h2>`;     
@@ -94,7 +90,6 @@ function mostrarListGastos(gastosPorItem) {
         listaDiv.appendChild(itemDiv);
     }
 }
-// Função para adicionar um gasto a partir do formulário
 function adicionarGastoForm() {
     const categoria = document.getElementById('categoria').value;
     const item = document.getElementById('item').value;
@@ -109,7 +104,7 @@ function adicionarGastoForm() {
         alert('Registro Inválido! Preencha os valores corretamente');
     }
 }
-//Funcao para buscar por categoria
+
 buscarPorCategoria = (categoria) => {
    const gastosFiltrados = listaDeGastos.filter((el) => {
       return categoria.toLowerCase() === el.categoria.toLowerCase()
@@ -136,5 +131,4 @@ function exibirGastos() {
     mostrarListGastos(gastosPorItem);
 }
 
-// Exibir os gastos na lista
 exibirGastos();
